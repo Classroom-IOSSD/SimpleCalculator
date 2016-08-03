@@ -13,3 +13,4 @@ void my_fscanf(FILE *fp, const char *format, ...) {
 	}
 	va_end(list);
 }
+ 
