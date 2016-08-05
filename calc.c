@@ -23,7 +23,7 @@ int main(){
 
 		my_fscanf(fp, "%d", &line);
 	
-		for(int i=0; i<line-1; i++) {
+		for(int i=0; i<line-1 && !feof(fp); i++) {
 			my_fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
 			switch(operator) {
 				case '+':
