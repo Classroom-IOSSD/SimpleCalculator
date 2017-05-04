@@ -3,30 +3,44 @@
 
 int main(){
 	FILE *fp = NULL;
-	int operand1, operand2;
+	
+    int (*fp_add) (int, int);
+    int (*fp_minus) (int, int);
+    int (*fp_mul) (int, int);
+    float (*fp_div) (float, float);
+
+    int operand1, operand2;
 	char operator = ' ';
-	int result, line = 0;
+	float result;
+    int line = 0;
 
 	fp = fopen("read.txt","r");
+
+    fp_add = add;
+    fp_minus = minus;
+    fp_mul = mul;
+    fp_div = div;
+
 	if(fp!=NULL){
 		fscanf(fp, "%d", &line);
 	
-		for(int i=0; i<line; i++) {
+		for(int i=1; i<line; i++) {
 			fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
 			switch(operator) {
 				case '+':
-				result = add(operand1, operator);
+				result = fp_add(operand1, operand2);
 				break;
 				case '-':
-				result = minus(operand1, operator);
-				break;
+				result = fp_minus(operand1, operand2);
+                break;
 				case '*':
-				result = mul(operand1, operator);
+				result = fp_mul(operand1, operand2);
+                break;
 				case '/':
-				result = div(operand1, operator);
+				result = fp_div((float)operand1, (float)operand2);
 				break;
 			}		
-			printf("%d %c %d = %d\n",
+			printf("%d %c %d = %f\n",
 				 operand1, operator, operand2, result);
 		}
 	}
