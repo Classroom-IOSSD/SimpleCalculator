@@ -5,29 +5,35 @@ int main(){
 	FILE *fp = NULL;
 	int operand1, operand2;
 	char operator = ' ';
-	int result, line = 0;
-
+	int line, i = 0;
+	double result=0;
+	double (*func)(int,int);
 	fp = fopen("read.txt","r");
+
 	if(fp!=NULL){
 		fscanf(fp, "%d", &line);
-	
-		for(int i=0; i<line; i++) {
+		
+		for(i=0; i<line; i++) {
 			fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
-			switch(operator) {
+			if(feof(fp) == 1) // 1 == EOF
+				break;
+			
+			switch(operator){
 				case '+':
-				result = add(operand1, operator);
+				func = add;
 				break;
 				case '-':
-				result = minus(operand1, operator);
+				func = minus;
 				break;
 				case '*':
-				result = mul(operand1, operator);
-				case '/':
-				result = div(operand1, operator);
+				func = mul;
 				break;
-			}		
-			printf("%d %c %d = %d\n",
-				 operand1, operator, operand2, result);
+				case '/':
+				func = div;
+				break;
+			}
+			result = func(operand1, operand2);		
+			printf("%d %c %d = %lf\n", operand1, operator, operand2, result);
 		}
 	}
 	return 0;
