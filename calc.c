@@ -2,6 +2,10 @@
 #include "operators.h"
 
 int main(){
+	double (*addfp)(int,int) = add;
+	double (*minusfp)(int,int) = minus;
+	double (*mulfp)(int,int) = mul;
+	double (*divfp)(double,double) = div;
 	FILE *fp = NULL;
 	int operand1, operand2;
 	char operator = ' ';
