@@ -6,7 +6,8 @@ int main(){
 	int operand1, operand2,line=0;
 	char operator = ' ';
 	double result;
-
+	double (*function_p) (int ,int );
+	
 	fp = fopen("read.txt","r");
 	if(fp!=NULL){
 		fscanf(fp, "%d", &line);
@@ -15,18 +16,23 @@ int main(){
 			if(fscanf(fp, "%d %c %d",&operand1, &operator, &operand2)==EOF){break;};
 			switch(operator) {
 				case '+':
-				result = add(operand1, operand2);
+				//result = add(operand1, operand2);
+				function_p = add;
 				break;
 				case '-':
-				result = minus(operand1, operand2);
+				//result = minus(operand1, operand2);
+				function_p = minus;
 				break;
 				case '*':
-				result = mul(operand1, operand2);
+				//result = mul(operand1, operand2);
+				function_p = mul;
 				break;
 				case '/':
-				result = div(operand1, operand2);
+				//result = div(operand1, operand2);
+				function_p = div;
 				break;
-			}		
+			}
+			result = function_p(operand1,operand2);		
 			printf("%d %c %d = %f\n",
 				 operand1, operator, operand2, result);
 		}
