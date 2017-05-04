@@ -1,4 +1,4 @@
-int add(int op1, int op2);
-int mul(int op1, int op2);
-int div(int op1, int op2);
-int minus(int op1, int op2);
+double add(double op1, double op2);
+double mul(double op1, double op2);
+double div(double op1, double op2);
+double minus(double op1, double op2);
