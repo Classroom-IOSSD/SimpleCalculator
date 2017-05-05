@@ -1,32 +1,42 @@
 #include <stdio.h>
 #include "operators.h"
 
+double cal (double oper1,double oper2, double (*func)(double,double))
+{
+	return func(oper1,oper2);
+}
+ 
+
 int main(){
 	FILE *fp = NULL;
-	int operand1, operand2;
+	double operand1, operand2;
 	char operator = ' ';
-	int result, line = 0;
+	double result;
+	int line = 0;
+	double (*func)(double, double)=NULL;
 
 	fp = fopen("read.txt","r");
 	if(fp!=NULL){
 		fscanf(fp, "%d", &line);
-	
-		for(int i=0; i<line; i++) {
-			fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
+		
+		for(int i=0; i<line-1; i++) {
+			fscanf(fp, "%lf %c %lf",&operand1, &operator, &operand2);
 			switch(operator) {
 				case '+':
-				result = add(operand1, operator);
+				func = add;
 				break;
 				case '-':
-				result = minus(operand1, operator);
+				func = minus;
 				break;
 				case '*':
-				result = mul(operand1, operator);
-				case '/':
-				result = div(operand1, operator);
+				func = mul;
 				break;
-			}		
-			printf("%d %c %d = %d\n",
+				case '/':
+				func = div;
+				break;
+			}
+			result = cal(operand1, operand2, func);		
+			printf("%.0lf %c %.0lf = %lf\n",
 				 operand1, operator, operand2, result);
 		}
 	}
