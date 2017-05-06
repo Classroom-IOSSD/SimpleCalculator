@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "operators.h"
-
+ 
 int main(){
 	FILE *fp = NULL;
 	double  operand1, operand2;
