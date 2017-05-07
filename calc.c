@@ -3,30 +3,35 @@
 
 int main(){
 	FILE *fp = NULL;
-	int operand1, operand2;
+	float operand1, operand2;
 	char operator = ' ';
-	int result, line = 0;
+	float result, line = 0;
 
 	fp = fopen("read.txt","r");
 	if(fp!=NULL){
-		fscanf(fp, "%d", &line);
+		fscanf(fp, "%f", &line);
 	
-		for(int i=0; i<line; i++) {
-			fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
+		for(int i=1; i<line; i++) {
+			fscanf(fp, "%f %c %f",&operand1, &operator, &operand2);
+			
+			float(*cal)(float, float);
+			
 			switch(operator) {
 				case '+':
-				result = add(operand1, operator);
+					cal = add;
 				break;
 				case '-':
-				result = minus(operand1, operator);
+					cal = minus;
 				break;
 				case '*':
-				result = mul(operand1, operator);
-				case '/':
-				result = div(operand1, operator);
+					cal = mul;
 				break;
-			}		
-			printf("%d %c %d = %d\n",
+				case '/':
+					cal = div;
+				break;
+			}
+			result = cal(operand1, operand2);		
+			printf("%f %c %f = %f\n",
 				 operand1, operator, operand2, result);
 		}
 	}
