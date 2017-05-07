@@ -10,6 +10,6 @@ $(TARGET): $(OBJS)
 	$(CC) $(OUTPUT_OPTION) $(CFLAGS) $^
 
 clean:
-	$(RM) $(OBJS) $(TARGET)
+	$(RM)  $(OBJS) $(TARGET)
 
 

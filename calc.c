@@ -13,20 +13,24 @@ int main(){
 	
 		for(int i=1; i<line; i++) {
 			fscanf(fp, "%f %c %f",&operand1, &operator, &operand2);
+			
+			float(*cal)(float, float);
+			
 			switch(operator) {
 				case '+':
-				result = add(operand1, operand2);
+					cal = add;
 				break;
 				case '-':
-				result = minus(operand1, operand2);
+					cal = minus;
 				break;
 				case '*':
-				result = mul(operand1, operand2);
+					cal = mul;
 				break;
 				case '/':
-				result = div(operand1, operand2);
+					cal = div;
 				break;
-			}		
+			}
+			result = cal(operand1, operand2);		
 			printf("%f %c %f = %f\n",
 				 operand1, operator, operand2, result);
 		}
