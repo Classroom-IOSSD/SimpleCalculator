@@ -6,9 +6,8 @@ void my_fscanf(FILE *fp, const char *format, ...)
 {
 	va_list list;
 	va_start(list, format);
-	int *a;
 	int b;
-	char *c;
+
 	while(*format)
 	{
 		if(*format == '%')
@@ -17,23 +16,59 @@ void my_fscanf(FILE *fp, const char *format, ...)
 			switch(*format)
 			{
 				case 'd':
-					a = va_arg(list, int*);
+					int* a = va_arg(list, int*);
 					while(isspace(b = getc(fp))){}
-					unsigned int num = 0;
+					*a = 0;
 					while (isdigit(b)){
-						num = num * 10 + b - '0';
+						*a = *a * 10 + b - '0';
 						b = getc(fp);
 					}
-					*a = num;
+					ungetc(c, fp);
 					break;
 
 				case 'c':
 				
-					c = va_arg(list, char*);
+					char* c = va_arg(list, char*);
 					b = getc(fp);
 					*c = b;
 					break;
-				
+
+				case 's':
+					char* s = va_arg(list, char*);
+					s[0] = 0;
+					b = getc(fp);
+					while(!isspace(b))
+					{
+						strncat(s, &b, 1);
+						b = getc(fp);
+					}
+					ungetc(b, fp);
+					break;
+
+				case 'f':
+					double* f = va_arg(list, float*);
+					b = getc(fp);
+					f = 0;
+					while(!isspace(b)) 
+					{
+						if(b == '.')
+						{
+							b = getc(fp);
+							break;
+						}
+						f = f * 10 + (b - '0');
+						b = getc(fp);
+					}
+					int i = 1;
+					while (!isspace(b) && isdigit(b))
+					{
+						f = f + (b - '0') *0.1 *i;
+						b = getc(fp);
+						n++;
+					}
+					ungetc(b, fp);
+					break;	
+
 				case ' ':
 				
 					break;		
