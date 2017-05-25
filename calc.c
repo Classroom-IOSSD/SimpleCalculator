@@ -13,9 +13,7 @@ int main(){
 		fscanf(fp, "%d", &line);
 		double (*funcOperator)(double ,double);
 		for(int i=0; i<line; i++) {
-			printf("ss");
 			my_fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
-			printf("aa");
 			if(feof(fp)) break;
 			switch(operator) {
 				case '+':
