@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "operators.h"
+#include "my_fscanf.h"
 
 int main(){
 	FILE *fp = NULL;
@@ -9,10 +10,10 @@ int main(){
 
 	fp = fopen("read.txt","r");
 	if(fp!=NULL){
-		fscanf(fp, "%d", &line);
+		my_fscanf(fp, "%d", &line);
 	
 		for(int i=0; i<line; i++) {
-			fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
+			my_fscanf(fp, "%d %c %d",&operand1, &operator, &operand2);
 			switch(operator) {
 				case '+':
 				result = add(operand1, operator);
