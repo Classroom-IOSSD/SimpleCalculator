@@ -1,16 +1,20 @@
 #include "operators.h"
 
-int add(int op1, int op2) {
-	return op1+op2;
+double add(int op1, int op2) {
+	double k = op1+op2;
+	return k;
 }
-int minus(int op1, int op2) {
-	return op1-op2;
+double minus(int op1, int op2) {
+	double k = op1-op2;
+	return k;
 }
-int mul(int op1, int op2) {
-	return op1*op2;
+double mul(int op1, int op2) {
+	double k = op1*op2;
+	return k;
 }
 
-int div(int op1, int op2) {
-	return op1%op2;
+double div(double op1, double op2) {
+	double k = op1/op2;
+	return k;
 }
 
